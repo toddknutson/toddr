@@ -13,14 +13,14 @@
 #'
 #' @export
 write_session_info <- function(out_file_prefix) {
-  out_dir <- dirname(as.character(out_file_prefix))
-  
-  # If previous session info is present, delete.
-  if (length(grep("session_info", list.files(out_dir))) > 0) { 
-    invisible(file.remove(grep("session_info", list.files(out_dir, full.names = TRUE), value = TRUE)))
-  }
-  # Write out session info
-  writeLines(capture.output(sessionInfo()), paste0(out_file_prefix, "session_info_", gsub(" |:", "_", Sys.time()), ".txt"))
-  print(Sys.time())
+	out_dir <- dirname(as.character(out_file_prefix))
+
+	# If previous session info is present, delete.
+	if (length(grep("session_info", list.files(out_dir))) > 0) { 
+	invisible(file.remove(grep("session_info", list.files(out_dir, full.names = TRUE), value = TRUE)))
+	}
+	# Write out session info
+	writeLines(capture.output(devtools::session_info()), paste0(out_file_prefix, "session_info_", gsub(" |:", "_", Sys.time()), ".txt"))
+	print(Sys.time())
 }
 
