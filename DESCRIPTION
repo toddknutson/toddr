@@ -1,4 +1,4 @@
-Package: toddpack
+Package: toddr
 Title: A collection of functions for RNAseq, scRNAseq, variant calling, and other bioinformatics methods.
 Version: 0.1.0
 Authors@R: 
