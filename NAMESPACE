@@ -2,4 +2,6 @@
 
 export(clean_mem)
 export(rnaseq_norm)
+export(robust_system)
+export(robust_system_check)
 export(write_session_info)
