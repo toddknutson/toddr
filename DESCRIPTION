@@ -22,4 +22,12 @@ Imports:
     forcats,
     DESeq2,
     edgeR,
-    devtools
+    devtools,
+    Seurat,
+    fs,
+    RColorBrewer,
+    ggridges,
+    tidyverse,
+    openxlsx,
+    patchwork,
+    gtools
