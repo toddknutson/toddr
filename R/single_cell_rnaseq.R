@@ -2958,7 +2958,7 @@ tk_DotPlot <- function(
           return(mean(x = expm1(x = x)))
         }
       )
-      pct.exp <- apply(X = data.use, MARGIN = 2, FUN = PercentAbove, threshold = 0)
+      pct.exp <- apply(X = data.use, MARGIN = 2, FUN = tk_PercentAbove, threshold = 0)
       return(list(avg.exp = avg.exp, pct.exp = pct.exp))
     }
   )
@@ -3087,8 +3087,9 @@ tk_DotPlot <- function(
 }
 
 
-#' PercentAbove
+#' tk_PercentAbove
 #' https://github.com/satijalab/seurat/blob/4e868fcde49dc0a3df47f94f5fb54a421bfdf7bc/R/utilities.R#L2127-L2136
+#' This was copied exactly from Seurat. The function is not exported from Seurat, so I included it here.
 #' Calculate the percentage of a vector above some threshold
 #'
 #' @param x Vector of values
@@ -3096,7 +3097,7 @@ tk_DotPlot <- function(
 #'
 #' @return Returns the percentage of `x` values above the given threshold
 #' @export
-PercentAbove <- function(x, threshold) {
+tk_PercentAbove <- function(x, threshold) {
   return(length(x = x[x > threshold]) / length(x = x))
 }
 
