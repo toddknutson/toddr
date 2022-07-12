@@ -2,6 +2,7 @@
 
 export(add_nt_and_aa_clonotypes)
 export(clean_mem)
+export(mkoutdir)
 export(rnaseq_norm)
 export(robust_system)
 export(robust_system_check)

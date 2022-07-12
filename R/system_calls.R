@@ -20,21 +20,24 @@
 #'
 #' @export
 robust_system <- function(command) {
-  stderrFile <- tempfile(pattern="R_robust.system_stderr", fileext=as.character(Sys.getpid()))
-  stdoutFile <- tempfile(pattern="R_robust.system_stdout", fileext=as.character(Sys.getpid()))
+    stdoutFile <- tempfile(pattern = "R_robust_system_stdout.", fileext = as.character(Sys.getpid()))
+    stderrFile <- tempfile(pattern = "R_robust_system_stderr.", fileext = as.character(Sys.getpid()))
+    
+    cat("robust_system temp files (below) are deleted when command completes.", sep = "\n")
+    cat(command, sep = "\n")
+    cat(stdoutFile, sep = "\n")
+    cat(stderrFile, sep = "\n")
+    
+    retval <- list()
+    retval$command <- command
+    retval$exit_status <- system(paste0(command, " 2> ", shQuote(stderrFile), " > ", shQuote(stdoutFile)))
+    retval$stdout <- readLines(stdoutFile)
+    retval$stderr <- readLines(stderrFile)
 
 
-  retval <- list()
-  retval$command <- command
-  retval$exit_status <- system(paste0(command, " 2> ", shQuote(stderrFile), " > ", shQuote(stdoutFile)))
-  retval$stdout <- readLines(stdoutFile)
-  retval$stderr <- readLines(stderrFile)
-
-
-  unlink(c(stdoutFile, stderrFile))
-  return(retval)
+    unlink(c(stdoutFile, stderrFile))
+    return(retval)
 }
-
 
 
 

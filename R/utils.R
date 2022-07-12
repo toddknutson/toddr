@@ -51,3 +51,45 @@ clean_mem <- function(n = 10) {
 
 
 
+
+
+
+
+
+
+#' Make an output directory using scratch location 
+#'
+#' @param out_dir String, path to output directory
+#' @param use_scratch Logical. Should the output dir be created on scratch, with a symlink to the scratch location placed at out_dir?
+#'
+#' @return None
+#'
+#' @examples
+#' \dontrun{
+#' mkoutdir()
+#' }
+#'
+#' @export
+mkoutdir <- function(out_dir, use_scratch = FALSE) {
+    if (use_scratch == "TRUE") {
+        out_dir_scratch <- glue("/scratch.global/knut0297_scratch{out_dir}")
+
+        if (!dir.exists(glue("{out_dir_scratch}"))) {dir.create(glue("{out_dir_scratch}"), recursive = TRUE)}
+
+        # If an old symlink or exists, remove it
+        system(glue("if [ -L {out_dir} ]; then rm -rf {out_dir}; fi"))
+        system(glue("if [ -d {out_dir} ]; then rm -rf {out_dir}; fi"))
+        file.symlink(glue("{out_dir_scratch}"), dirname(glue("{out_dir}")))
+        setwd(glue("{out_dir}"))
+    } else {
+        # If an old symlink or dir exists, remove it
+        system(glue("if [ -L {out_dir} ]; then rm -rf {out_dir}; fi"))
+        system(glue("if [ -d {out_dir} ]; then rm -rf {out_dir}; fi"))
+        if (!dir.exists(glue("{out_dir}"))) {dir.create(glue("{out_dir}"), recursive = TRUE)}
+        setwd(glue("{out_dir}"))
+    }
+}
+
+
+
+
