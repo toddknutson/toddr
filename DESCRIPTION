@@ -30,4 +30,5 @@ Imports:
     tidyverse,
     openxlsx,
     patchwork,
-    gtools
+    gtools,
+    snakecase
